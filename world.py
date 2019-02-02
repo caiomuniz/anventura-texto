@@ -35,26 +35,41 @@ class EnemyTile(MapTile):
         r = random.random()
         if r < 0.50:
             self.enemy = enemies.GiantSpider()
-            self.alive_text = "A giant spider jumps down from its web in front of you!"
-            self.dead_text = "The corpse of a dead spider rots on the ground."
+            self.alive_text = """
+            A giant spider jumps down from its web in front of you!
+            """
+            self.dead_text = """
+            The corpse of a dead spider rots on the ground.
+            """
         elif r < 0.80:
             self.enemy = enemies.Ogre()
-            self.alive_text = "A mighty ogre blocks your path."
-            self.dead_text = "A dead ogre reminds you of your tryumph."
+            self.alive_text = """
+            A mighty ogre blocks your path.
+            """
+            self.dead_text = """
+            A dead ogre reminds you of your tryumph.
+            """
         elif r < 0.95:
             self.enemy = enemies.BatColony()
-            self.alive_text = "Seems like you got lost in the middle of a smarm of bats!"
-            self.dead_text = "Dozens of dead bats are scattered on the ground."
+            self.alive_text = """
+            Seems like you got lost in the middle of a smarm of bats!
+            """
+            self.dead_text = """
+            Dozens of dead bats are scattered on the ground.
+            """
         else:
             self.enemy = enemies.RockElemental()
-            self.alive_text = "A pile of rocks seems to have found its way to me middle of the room. When you get near it, you see it's a Rock Elemental!"
-            self.dead_text = "As it was defeated, it became a pile of crumbled rocks."
+            self.alive_text = """
+            A pile of rocks seems to have found its way to me middle of the room. When you get near it, you see it's a Rock Elemental!
+            """
+            self.dead_text = """
+            As it was defeated, it became a pile of crumbled rocks.
+            """
 
         super().__init__(x,y)
 
     def intro_text(self):
-        text = self.alive_text if self.enemy.is_alive
-        else self.dead_text
+        text = self.alive_text if self.enemy.is_alive() else self.dead_text
         return text
 
     def modify_player(self, player):
@@ -86,7 +101,7 @@ def parse_world_dsl():
         dsl_cells = [c for c in dsl_cells if c]
         #Cria cada uma das células do mapa
         for x, dsl_cell in enumerate(dsl_cells):
-            tile_type = tyle_tipe_dict[dsl_cell]
+            tile_type = tile_type_dict[dsl_cell]
             row.append(tile_type(x,y) if tile_type else None)
 
         world_map.append(row)
@@ -100,7 +115,7 @@ def is_dsl_valid(dsl):
         return False
     lines = dsl.splitlines()
     lines = [l for l in lines if l]
-    pipe_counts = [line.count("|") fo line in lines]
+    pipe_counts = [line.count("|") for line in lines]
     for count in pipe_counts:
         if count != pipe_counts[0]:
             return False

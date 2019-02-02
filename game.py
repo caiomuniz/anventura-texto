@@ -21,7 +21,7 @@ def choose_action(room, player):
         action = available_actions.get(action_input)
         if action:
             action()
-        else
+        else:
             print("Invalid action!")
 
 def get_available_actions(room, player):
