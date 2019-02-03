@@ -3,20 +3,23 @@ import world
 
 class Player:
     def __init__(self):
-        self.inventory = [items.Plank(),
-                         items.Dagger(),
-                         'Gold(5)',
-                         items.MouldyBread()]
-        self.x = 1
-        self.y = 2
+        self.inventory = [items.Club(),
+                         items.MouldyBread()
+                         ]
+        self.x = world.start_tile_location[0]
+        self.y = world.start_tile_location[1]
         self.hp = 100
+        self.gold = 5
+        self.victory = False
+
+    def is_alive(self):
+        return self.hp > 0
 
     def print_inventory(self):
         print("Inventory:")
         for item in self.inventory:
             print('> ' + str(item))
-        best_weapon = self.most_powerful_weapon()
-        print("Your best weapon is your {}".format(best_weapon))
+        print("Gold: {}.".format(self.gold))
 
     def most_powerful_weapon(self):
         max_damage = 0
@@ -62,6 +65,10 @@ class Player:
                 valid = True
             except (IndexError, ValueError):
                 print("Invalid choice. Try again.")
+
+    def trade(self):
+        room = world.tile_at(self.x, self.y)
+        room.check_if_trade(self)
 
     def move(self, dx, dy):
         self.x += dx
