@@ -1,5 +1,4 @@
 #Imports
-import os
 import world
 from player import Player
 from collections import OrderedDict
@@ -24,6 +23,8 @@ def choose_action(room, player):
     while not action:
         available_actions = get_available_actions(room, player)
         action_input = input("> ")
+        if action_input in ['q', 'Q']:
+            exit()
         action = available_actions.get(action_input)
         if action:
             action()

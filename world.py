@@ -82,7 +82,7 @@ class EnemyTile(MapTile):
         if self.enemy.is_alive():
             player.hp = player.hp - (self.enemy.damage - 0.5*player.most_powerful_armor())
             print("Enemy does {} damage.".format(self.enemy.damage))
-            if player.hp < 25:
+            if player.hp < 25 and player.hp > 0:
                 print("You are in critical condition, you should heal.")
 
 #Tiles where the consumable Trader is.

@@ -25,7 +25,7 @@ class Armor:
 class Club(Weapon):
     def __init__(self):
         self.name = "Club"
-        self.description =  "A half-burnt piece of wookd taken out of the campfire."\
+        self.description =  "A half-burnt piece of wookd taken out of the campfire. "\
                             "Not very strong, but better than bare fists."
         self.damage = 5
         self.value = 2

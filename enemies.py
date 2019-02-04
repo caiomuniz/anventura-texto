@@ -6,7 +6,7 @@ class Enemy:
         return self.name
 
     def is_alive(self):
-        return self.hp>0
+        return self.hp > 0
 
 class GiantSpider(Enemy):
     def __init__(self):

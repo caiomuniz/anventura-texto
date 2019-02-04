@@ -4,7 +4,7 @@ import world
 class Player:
     def __init__(self):
         self.inventory = [items.Club(),
-                         items.MouldyBread()
+                         items.MouldyBread(),
                          ]
         self.x = world.start_tile_location[0]
         self.y = world.start_tile_location[1]
@@ -16,11 +16,13 @@ class Player:
         return self.hp > 0
 
     def print_inventory(self):
+        print("==========================================")
         print("Inventory:")
         for item in self.inventory:
             print('> ' + str(item))
         print("Gold: {}.".format(self.gold))
         self.print_life()
+        print("==========================================")
 
     def print_life(self):
         if self.hp < 25:
@@ -54,7 +56,10 @@ class Player:
                     max_armor = item.armor
             except AttributeError:
                 pass
-        return best_armor
+        if best_armor == None:
+            return 0
+        else:
+            return best_armor
 
     def attack(self):
         best_weapon = self.most_powerful_weapon()

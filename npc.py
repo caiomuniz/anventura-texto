@@ -16,6 +16,6 @@ class ConsumableTrader(NonPlayableCharacter):
 
 class WeaponTrader(NonPlayableCharacter):
     def __init__(self):
-        self.name = "Weapons Trader"
+        self.name = "Trader"
         self.gold = 100
-        self.inventory = [items.Machete(), items.Dagger(), items.RustySword()]
+        self.inventory = [items.Dagger(), items.RustySword(), items.Machete(), items.CottonShirt()]
