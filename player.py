@@ -20,6 +20,17 @@ class Player:
         for item in self.inventory:
             print('> ' + str(item))
         print("Gold: {}.".format(self.gold))
+        self.print_life()
+
+    def print_life(self):
+        if self.hp < 25:
+            print("You are in critical condition. You should heal now!")
+        elif self.hp < 50:
+            print("You have some wounds. but nothing critical")
+        elif self.hp < 100:
+            print("You have just some bruises.")
+        else:
+            print("You have full life.")
 
     def most_powerful_weapon(self):
         max_damage = 0
@@ -33,6 +44,18 @@ class Player:
                 pass
         return best_weapon
 
+    def most_powerful_armor(self):
+        max_armor = 0
+        best_armor = None
+        for item  in self.inventory:
+            try:
+                if item.armor > max_armor:
+                    best_armor = item
+                    max_armor = item.armor
+            except AttributeError:
+                pass
+        return best_armor
+
     def attack(self):
         best_weapon = self.most_powerful_weapon()
         room = world.tile_at(self.x, self.y)
@@ -42,7 +65,7 @@ class Player:
         if not enemy.is_alive():
             print("You killed {}!".format(enemy.name))
         else:
-            print("{} HP is {}".format(enemy.name, enemy.hp))
+            print("{} receives {} damage".format(enemy.name, best_weapon.damage))
 
     def heal(self):
         consumables = [ item for item in self.inventory if isinstance(item, items.Consumable)]

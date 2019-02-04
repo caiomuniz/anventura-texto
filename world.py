@@ -16,6 +16,7 @@ class MapTile:
         pass
 
 class StartTile(MapTile):
+
     def intro_text(self):
         return """
         You find yourself in a dark room inside an old mansion.
@@ -79,8 +80,10 @@ class EnemyTile(MapTile):
 
     def modify_player(self, player):
         if self.enemy.is_alive():
-            player.hp = player.hp - self.enemy.damage
-            print("Enemy does {} damage. You have {} HP remaining.".format(self.enemy.damage, player.hp))
+            player.hp = player.hp - (self.enemy.damage - 0.5*player.most_powerful_armor())
+            print("Enemy does {} damage.".format(self.enemy.damage))
+            if player.hp < 25:
+                print("You are in critical condition, you should heal.")
 
 #Tiles where the consumable Trader is.
 class TraderTile(MapTile):
@@ -115,7 +118,7 @@ class TraderTile(MapTile):
         def check_if_trade(self, player):
             while True:
                 print("Would you like to (B)uy, (S)ell or (Q)uit? ")
-                user_input = input()
+                user_input = input("> ")
                 if user_input in ['q','Q']:
                     return
                 elif user_input in ['b', 'B']:

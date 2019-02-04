@@ -13,6 +13,13 @@ class Consumable:
     def __str__(self):
         return "{} (+ {} HP)".format(self.name, self.healing_value)
 
+class Armor:
+    def __init__(self):
+        raise NotImplementedError("Do not create raw armor objects!")
+
+    def __str__(self):
+        return "{}: +{} armor".format(self.name, self.armor)
+
 ########## Weapons ##########
 
 class Club(Weapon):
@@ -27,7 +34,7 @@ class Dagger (Weapon):
     def __init__(self):
         self.name = "Dagger"
         self.description = "A small dagger with some rust. " \
-                        "Somewhat more dangerous than a plank."
+                        "Somewhat more dangerous than a club."
         self.damage = 10
         self.value = 5
 
@@ -59,3 +66,11 @@ class DriedMeat(Consumable):
         self.name: "Dried Meat"
         self.healing_value = 25
         self.value = 28
+
+########## Armors ##########
+
+class CottonShirt(Armor):
+    def __init__(self):
+        self.name = "Cotton Shirt"
+        self.armor = 5
+        self.value = 3
